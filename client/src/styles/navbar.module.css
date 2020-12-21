@@ -1,0 +1,45 @@
+.nav {
+  z-index: 250;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  padding: 5vh 5vw;
+  display: flex;
+  align-items: center;
+  transition: 250ms;
+  box-shadow: none;
+}
+
+.nav_ul {
+  z-index: 250;
+  display: flex;
+}
+
+.nav_ul_item {
+  z-index: 250;
+  transition: 250ms;
+  margin-right: 20px;
+  list-style: none;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  font-family: "Montserrat";
+  font-size: clamp(1rem, 1.15vw, 1.15vw);
+  mix-blend-mode: difference;
+}
+
+.nav_ul_item[data-selected="false"]:hover {
+  z-index: 250;
+  text-shadow: 0px 0px 5px white;
+  color: white;
+}
+
+.website_logo {
+  z-index: 250;
+  transform: translateX(-15px);
+  min-width: 50px;
+  min-height: 30px;
+  width: 4vw;
+  height: 2vw;
+  object-fit: cover;
+}

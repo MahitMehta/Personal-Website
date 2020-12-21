@@ -1,0 +1,70 @@
+.posts_section {
+  width: 100%;
+  min-height: calc(100vh - 7.5vw);
+  margin-top: 7.5vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2vw;
+}
+
+.month {
+  transition: 500ms;
+  margin-top: 8.5vh;
+  color: white;
+  opacity: 0;
+  font-family: "Nunito Sans";
+  font-size: clamp(30px, 3vw, 3vw);
+  transform: translateY(25px);
+}
+
+.month_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.month_div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  padding: 0px 15px;
+  margin-bottom: 2vh;
+}
+
+.load_more {
+  transition: 250ms;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: "Nunito Sans";
+  margin: auto 0px;
+  font-size: clamp(1rem, 1.25vw, 1.25vw);
+  transform: translateY(calc(1vw - 10px));
+  animation: fadeIn 250ms ease 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.load_more:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .posts_section {
+    margin-top: 100px;
+  }
+  .month {
+    margin-top: 25px;
+  }
+}
