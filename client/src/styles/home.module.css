@@ -184,6 +184,7 @@
 .part_code_div {
   width: 100%;
   height: 25vh;
+  min-height: 165px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -213,6 +214,7 @@
   width: 80%;
   margin: auto 10px 3.5vh 10px;
   height: 6vh;
+  min-height: 30px;
   color: white;
   font-family: "Abel";
   font-size: clamp(15px, 1.2vw, 1.2vw);

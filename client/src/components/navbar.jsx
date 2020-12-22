@@ -12,10 +12,10 @@ const Navbar = ({ section, change }) => {
     useEffect(() => {
         let currentOffset = window.pageYOffset;
         window.addEventListener("scroll", (e) => {
-            if (window.pageYOffset !== 0 && navbar.current && window.innerWidth <= 1200) {
+            if (window.pageYOffset > 0 && navbar.current && window.innerWidth <= 1200) {
                 navbar.current.style.boxShadow = "0px 5px 10px 0px rgba(0, 0, 0, 0.5)";
                 navbar.current.style.backgroundColor = "var(--dark-grey)";
-            } else if (window.pageYOffset === 0 && navbar.current) {
+            } else if (window.pageYOffset <= 0 && navbar.current) {
                 navbar.current.style.boxShadow = "";
                 navbar.current.style.backgroundColor = "transparent";
             }

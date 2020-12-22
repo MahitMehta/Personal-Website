@@ -49,8 +49,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 18vw;
-  min-width: 250px;
+  width: 20vw;
+  min-width: 225px;
 }
 
 .message {
@@ -59,6 +59,7 @@
 }
 
 .close {
+  transition: 250ms;
   font-size: clamp(0.85rem, 1vw, 1vw);
   color: var(--light-blue);
   font-family: "Nunito Sans";
@@ -68,4 +69,9 @@
   left: 85%;
   position: absolute;
   bottom: 5%;
+  outline: none;
+}
+
+.close:hover {
+  color: #d2e1fa;
 }

@@ -26,6 +26,7 @@
   font-family: "Montserrat";
   font-size: clamp(1rem, 1.15vw, 1.15vw);
   mix-blend-mode: difference;
+  cursor: pointer;
 }
 
 .nav_ul_item[data-selected="false"]:hover {
