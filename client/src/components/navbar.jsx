@@ -19,8 +19,7 @@ const Navbar = ({ section, change }) => {
                 navbar.current.style.boxShadow = "";
                 navbar.current.style.backgroundColor = "transparent";
             }
-
-            if (window.pageYOffset > currentOffset && navbar.current && document.body.scrollTop >= 0) {
+            if (window.pageYOffset > currentOffset && navbar.current && window.pageYOffset > 0) {
                 navbar.current.style.transform = "translateY(-100%)";
                 currentOffset = window.pageYOffset;
             } else if (window.pageYOffset <= currentOffset && navbar.current) {
