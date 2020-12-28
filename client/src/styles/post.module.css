@@ -65,7 +65,7 @@
 
 .post_date {
   color: white;
-  font-weight: "Nunito Sans";
+  font-family: "Nunito Sans";
   margin-top: 5px;
   font-size: clamp(1rem, 1.25vw, 1.25vw);
 }

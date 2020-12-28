@@ -4,8 +4,10 @@ import Footer from "./footer";
 import Navbar from "../components/navbar";
 
 //IMGS
-import Buildings from "../images/buildings.jpg";
-import Ai from "../images/ai.webp";
+// import Buildings from "../images/buildings.jpg";
+import Moments from "../images/moments-default.svg";
+import Ai from "../images/machine-default.svg";
+import Code from "../images/code-default.svg";
 import Alert from "./alert";
 
 const partsTransition = (parts, direction) => {
@@ -120,6 +122,20 @@ const Home = ({ section }) => {
 
     const mainSection = useRef();
 
+    /* Original Photography Section Visual Markup
+        <div className={homeStyles.buildings_div}>
+                <img src={Buildings} alt="Building" className={homeStyles.buildings}/>
+                <div className={homeStyles.quote_div}>
+                    <p className={homeStyles.quote}>No man really is happy or safe without a hobby</p>
+                    <p className={homeStyles.quote_author}>~ William Osler</p>
+                </div>
+        </div>
+    */
+
+    /* Original Web Projects Section Visual Markup
+        <div className={homeStyles.part_code_div} ref={codeDiv}></div>
+    */
+
     return (
         <React.Fragment>
             <Navbar section={section} change={location => {
@@ -147,23 +163,19 @@ const Home = ({ section }) => {
             <div className={homeStyles.parts} ref={parts}>
                 <div className={homeStyles.photography}>
                     <h1 className={homeStyles.part_title}>Photography &<br />Cinematography</h1>
-                    <div className={homeStyles.buildings_div}>
-                            <img src={Buildings} alt="Building" className={homeStyles.buildings}/>
-                            <div className={homeStyles.quote_div}>
-                                <p className={homeStyles.quote}>No man really is happy or safe without a hobby</p>
-                                <p className={homeStyles.quote_author}>~ William Osler</p>
-                            </div>
-                    </div>
+                    <img className={`${homeStyles.part_img} ${homeStyles.photography_img}`} src={Moments} alt="Photography Moments"/>
+                    <p className={homeStyles.part_description}>
+                            Capturing moments has always been a enjoyable hobby of mines. Here you can view a few of my best captures!
+                    </p>
                     <button className={homeStyles.part_more} onClick={() => {
                             setAlert({ header: "Photography", message: "Coming Soon!" })
                         }}>Discover</button>
                 </div>
                 <div className={homeStyles.ai}>
                         <h1 className={homeStyles.part_title}>Artificial<br />Intelligence</h1>
-                        <img className={homeStyles.ai_image} src={Ai} alt="Artificial Intelligence"/>
+                        <img className={`${homeStyles.part_img} ${homeStyles.ai_img}`} src={Ai} alt="Artificial Intelligence"/>
                         <p className={homeStyles.part_description}>
-                            Whether you know it or you don’t, AI is being implemented everywhere.
-                            Over the years it has been grabbing everyone’s attention including mines. 
+                            Over the years, Artificial Intelligence has been grabbing everyone’s attention including mines. 
                         </p>
                         <button className={homeStyles.part_more} onClick={() => {
                             setAlert({ header: "Artificial Intelligence", message: "Coming Soon!" })
@@ -171,7 +183,7 @@ const Home = ({ section }) => {
                 </div>
                 <div className={homeStyles.web_projects}>
                         <h1 className={homeStyles.part_title}>Web<br />Projects</h1>
-                        <div className={homeStyles.part_code_div} ref={codeDiv}></div>
+                        <img className={`${homeStyles.part_img} ${homeStyles.web_projects_img}`} src={Code} alt="Web Projects"/>
                         <p className={homeStyles.part_description}>
                             Web designing / developing is a creative passion of mine. Here you can view some of my best work!
                         </p>
