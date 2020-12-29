@@ -70,7 +70,7 @@ const generalTransition = (section, direction) => {
     });
 }
 
-const updateCodeBox = (codeBox) => {
+const updateCodeBox = codeBox => {
     if (!codeBox.current) return;
     const codeLines = [
         {text: "<html>", spaces: 0},
@@ -88,6 +88,8 @@ const updateCodeBox = (codeBox) => {
         codeBox.current.appendChild(codeLine);
     });
 }
+
+
 
 const Home = ({ section }) => {
     document.title = "Home - Mahit Mehta";
@@ -122,6 +124,16 @@ const Home = ({ section }) => {
 
     const mainSection = useRef();
 
+    const pageTransition = (location) => {
+        if (location.toLowerCase() === section.toLowerCase()) return;
+        partsTransition(parts, "down");
+        generalTransition(general, "down");
+        setTimeout(() => {
+            const origin = window.location.origin;
+            window.location = `${origin}/${location.toLowerCase()}`;
+        }, 750);
+    }
+
     /* Original Photography Section Visual Markup
         <div className={homeStyles.buildings_div}>
                 <img src={Buildings} alt="Building" className={homeStyles.buildings}/>
@@ -138,15 +150,7 @@ const Home = ({ section }) => {
 
     return (
         <React.Fragment>
-            <Navbar section={section} change={location => {
-                if (location.toLowerCase() === section.toLowerCase()) return;
-                partsTransition(parts, "down");
-                generalTransition(general, "down");
-                setTimeout(() => {
-                    const origin = window.location.origin;
-                    window.location = `${origin}/${location.toLowerCase()}`;
-                }, 750);
-            }}/>
+            <Navbar section={section} change={location => pageTransition(location)}/>
             <section className={homeStyles.home_section} ref={mainSection} id="home_section">
             <div className={homeStyles.general} ref={general}>
                 <div className={homeStyles.greeting}>
@@ -168,7 +172,8 @@ const Home = ({ section }) => {
                             Capturing moments has always been a enjoyable hobby of mines. Here you can view a few of my best captures!
                     </p>
                     <button className={homeStyles.part_more} onClick={() => {
-                            setAlert({ header: "Photography", message: "Coming Soon!" })
+                            pageTransition('photography')
+                            // setAlert({ header: "Photography", message: "Coming Soon!" })
                         }}>Discover</button>
                 </div>
                 <div className={homeStyles.ai}>

@@ -1,0 +1,93 @@
+.posts_section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10vh;
+  min-height: calc(100vh - 10vh);
+}
+
+.post_div {
+  transition: 350ms 250ms;
+  opacity: 0;
+  transform: translateY(25px);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  min-width: 300px;
+  min-height: 300px;
+  width: 23vw;
+  height: 23vw;
+  margin: 20px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.post::after {
+  transition: 250ms;
+  content: "";
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.post:hover::after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.post:hover img {
+  transform: scale(1.05);
+}
+
+.post img {
+  transition: 250ms;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  align-items: center;
+}
+
+.more a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: "Nunito Sans";
+  font-size: clamp(15px, 1.2vw, 1.2vw);
+}
+
+.more a:hover {
+  text-decoration: underline;
+}
+
+.sm_icon {
+  min-width: 35px;
+  min-height: 35px;
+  width: 3vw;
+  height: 3vw;
+  margin: 15px;
+}
+
+.post_date {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: "Nunito Sans";
+  font-size: clamp(15px, 1.2vw, 1.2vw);
+}

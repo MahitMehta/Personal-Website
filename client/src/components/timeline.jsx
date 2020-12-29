@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from "../components/navbar";
 import timelineStyles from "../styles/timeline.module.css";
+
 import Footer from "./footer";
 import Alert from "./alert";
 import PostSection from "./postSection";
+
+import TimelineAPI from "../Classes/timeline";
 
 const Timeline = ({ section }) => {
     const [alert, setAlert] = useState({});
@@ -19,28 +22,29 @@ const Timeline = ({ section }) => {
         return  {year: year, month: month};
     }
 
+    const timelineAPI = new TimelineAPI();
+
     const getMonths = () => {
-        fetch("/api/timeline/months").then(response => response.json()).then(data => {
+        timelineAPI.months().then(data => {
             const sortedData = data.sort((a, b) => {
                 const dateOne = parseDate(a).year + parseDate(a).month;
                 const dateTwo = parseDate(b).year + parseDate(b).month;
                 return dateOne - dateTwo;
             })
             setAllMonths(sortedData.reverse());
-        });
+        }).catch(err => console.error(err))
     }
     
     const getTimeline = () => {
         const {year, month} = parseDate(allMonths[datesLoaded]);
 
-        fetch(`/api/timeline?y=${year}&m=${month}`)
-        .then(response => response.json())
-        .then(data => {
-            const currentPosts = {...data, ...posts};
-            // const newDate = Object.keys(data)[0];
-            setPosts(currentPosts);
-            setDatesLoaded(datesLoaded + 1);
-        });
+        timelineAPI.posts(year, month)
+            .then(data => {
+                const currentPosts = {...data, ...posts};
+                // const newDate = Object.keys(data)[0];
+                setPosts(currentPosts);
+                setDatesLoaded(datesLoaded + 1);
+            }).catch(err => console.error(err))
     }
 
     useEffect(() => {
