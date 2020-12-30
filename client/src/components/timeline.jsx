@@ -8,13 +8,16 @@ import PostSection from "./postSection";
 
 import TimelineAPI from "../Classes/timeline";
 
-const Timeline = ({ section }) => {
+const Timeline = ({ section, token }) => {
+    document.title = "Timeline - Mahit Mehta"
+
     const [alert, setAlert] = useState({});
 
     const [posts, setPosts] = useState({});
     const [allMonths, setAllMonths] = useState([]);
     const [datesLoaded, setDatesLoaded] = useState(0);
     const [direction, setDirection] = useState("up");
+    const [isError, setIsError] = useState(false);
 
     const parseDate = (rawDate) => {
         const year = parseInt(rawDate.match(/y[0-9]{4}m/g)[0].slice(1, -1));
@@ -22,10 +25,11 @@ const Timeline = ({ section }) => {
         return  {year: year, month: month};
     }
 
-    const timelineAPI = new TimelineAPI();
+    const timelineAPI = new TimelineAPI(token);
 
     const getMonths = () => {
         timelineAPI.months().then(data => {
+            if (!data.length) setIsError(true);
             const sortedData = data.sort((a, b) => {
                 const dateOne = parseDate(a).year + parseDate(a).month;
                 const dateTwo = parseDate(b).year + parseDate(b).month;
@@ -40,6 +44,7 @@ const Timeline = ({ section }) => {
 
         timelineAPI.posts(year, month)
             .then(data => {
+                if (!data.length) setIsError(true);
                 const currentPosts = {...data, ...posts};
                 // const newDate = Object.keys(data)[0];
                 setPosts(currentPosts);
@@ -48,8 +53,8 @@ const Timeline = ({ section }) => {
     }
 
     useEffect(() => {
-        if (!allMonths.length) getMonths();
-        else if (!Object.keys(posts).length) getTimeline();
+        if (!allMonths.length && !isError) getMonths();
+        else if (!Object.keys(posts).length && !isError) getTimeline();
     });
 
     const months = [

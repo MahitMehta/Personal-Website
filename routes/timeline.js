@@ -1,6 +1,15 @@
 const createError = require('http-errors')
+const reasourceToken = "bWFoaXRtLXByb3h5LXRva2VuOmQyNjIxNjI4LTNkMWMtNDBjYS05OGFkLWMzODk3NDc2ZDdlYQ==";
+
+const validToken = (token, next) => {
+    if (!token) next(createError(403))
+    const slicedToken = token.split('Basic ')
+    if (slicedToken[1] === reasourceToken) return 
+    else next(createError(403))
+}
 
 exports.months = (req, res, next, db) => {
+    validToken(req.headers['authorization'], next)
     const ref = db.collection('timeline')
     ref.get().then(response => {
         const months = response.docs.map(doc => doc.id)
@@ -11,6 +20,7 @@ exports.months = (req, res, next, db) => {
 }
 
 exports.posts = (req, res, next, db) => {
+    validToken(req.headers['authorization'], next)
     const errMsg = 'Either a internal server error occurred or the requested data can not be retrieved at this time'
 
     const year = req.query.y

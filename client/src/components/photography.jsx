@@ -5,22 +5,36 @@ import InstagramPost from "./instagramPost";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import Alert from "./alert";
+import DivisionNav from "./divisionNav";
 
 import Instagram from "../Classes/instagram";
 
-const Photography = () => {
+const Photography = ({ token }) => {
+    document.title = "Divisions - Mahit Mehta";
+
     const [alert, setAlert] = useState({});
     const [ posts, setPosts ] = useState([]);
     const [ direction, setDirection ] = useState("up");
+    const [isError, setIsError] = useState(false);
 
     const getPosts = () => {
-        const instagram = new Instagram();
+        const instagram = new Instagram(token);
         instagram.posts()
-            .then(data => setPosts(data));
+            .then(data => {
+                if (!data.length) setIsError(true);
+                setPosts(data);
+            })
+    }
+
+    const pageTranition = location => {
+        setTimeout(() => {
+            const origin = window.location.origin;
+            window.location = `${origin}/${location.toLowerCase()}`;
+        }, 750);
     }
 
     useEffect(() => {
-        if (posts.length) return;
+        if (posts.length || isError) return;
         getPosts();
     })
 
@@ -30,11 +44,13 @@ const Photography = () => {
         <React.Fragment>
             <Navbar section={"divisions"} change={location => {
                 if (location.toLowerCase() === "divisions".toLowerCase()) return;
-                setDirection("down")
-                setTimeout(() => {
-                    const origin = window.location.origin;
-                    window.location = `${origin}/${location.toLowerCase()}`;
-            }, 750);}}/>
+                setDirection("down");
+                pageTranition(location);
+                }}/>
+            <DivisionNav section="photography" direction={direction} transition={newLocation => {
+                setDirection("middle");
+                pageTranition(newLocation);
+            }}/>
             <ul className={photographyStyles.posts_section} ref={mainSection}>
                { posts.map(post => <InstagramPost post={post} key={post.id} direction={direction} />) } 
             </ul>

@@ -3,7 +3,7 @@ import Home from "../components/home";
 import Timeline from "../components/timeline";
 import "../styles/global.module.css";
 
-const View = ({ section }) => {
+const View = ({ section, token }) => {
     document.title = "Mahit Mehta";
 
     const selectSection = () => {
@@ -11,7 +11,7 @@ const View = ({ section }) => {
             case "home": 
                 return <Home section={section} />
             case "timeline": 
-                return <Timeline section={section} />
+                return <Timeline section={section} token={token} />
             default: 
                 return <Home section="home" />
         }

@@ -22,7 +22,8 @@ const Navbar = ({ section, change }) => {
             if (window.pageYOffset > currentOffset && navbar.current && window.pageYOffset > 0) {
                 navbar.current.style.transform = "translateY(-100%)";
                 currentOffset = window.pageYOffset;
-            } else if (window.pageYOffset <= currentOffset && navbar.current) {
+            } 
+            else if (window.pageYOffset <= currentOffset && navbar.current) {
                 navbar.current.style.transform = "translateY(0%)";
                 currentOffset = window.pageYOffset;
             }

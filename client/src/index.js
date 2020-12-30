@@ -8,21 +8,26 @@ import Photography from "./components/photography";
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
+const name = "mahitm-proxy-token";
+const pass = "d2621628-3d1c-40ca-98ad-c3897476d7ea";
+const token = `${name}:${pass}`;
+const encrytedToken = btoa(token);
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
         <Route exact path="/" render={() => (
-          <View section="home" />
+          <View section="home" token={encrytedToken}/>
         )}/>
         <Route exact path="/timeline" render={() => (
-          <View section="timeline" />
+          <View section="timeline" token={encrytedToken}/>
         )}/>
         <Route exact path="/divisions"  render={() => (
           <Redirect to="/photography"/>
         )}/>
         <Route exact path="/photography" render={() => (
-          <Photography />
+          <Photography token={encrytedToken} />
         )}/>
         <Route exact path="/admin" render={() => (
           <Admin />
