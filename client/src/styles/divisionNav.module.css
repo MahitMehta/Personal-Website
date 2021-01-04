@@ -16,12 +16,14 @@
   box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.5);
 }
 
-.division {
+.division,
+.section_icon:hover {
   transition: 250ms;
   list-style: none;
   color: rgba(255, 255, 255, 0.5);
 }
 
-.division:hover {
+.division:hover,
+.section_icon:hover {
   color: white;
 }

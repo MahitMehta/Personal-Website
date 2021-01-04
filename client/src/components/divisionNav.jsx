@@ -36,7 +36,7 @@ const DivisionNav = ({ section, direction, transition }) => {
                 onClick={() => {
                     redirect("photography")
                 }}>
-                <FontAwesomeIcon icon={faCamera}/>
+                <FontAwesomeIcon icon={faCamera} className={divisionNavStyles.section_icon}/>
             </li>
             <li 
                 className={divisionNavStyles.division}
@@ -44,7 +44,7 @@ const DivisionNav = ({ section, direction, transition }) => {
                 onClick={() => {
                     redirect("artificial-intelligence")
                 }}>
-                <FontAwesomeIcon icon={faRobot}/>
+                <FontAwesomeIcon icon={faRobot} className={divisionNavStyles.section_icon}/>
             </li>
             <li 
                 className={divisionNavStyles.division}
@@ -52,7 +52,7 @@ const DivisionNav = ({ section, direction, transition }) => {
                 onClick={() => {
                     redirect("web-projects")
                 }}>
-                <FontAwesomeIcon icon={faCode}/>
+                <FontAwesomeIcon icon={faCode} className={divisionNavStyles.section_icon}/>
             </li>
         </ul>
     )

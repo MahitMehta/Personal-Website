@@ -5,8 +5,12 @@ import timelineStyles from "../styles/timeline.module.css";
 import Footer from "./footer";
 import Alert from "./alert";
 import PostSection from "./postSection";
+import PostCreator from "./postCreator";
 
 import TimelineAPI from "../Classes/timeline";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Timeline = ({ section, token }) => {
     document.title = "Timeline - Mahit Mehta"
@@ -18,10 +22,23 @@ const Timeline = ({ section, token }) => {
     const [datesLoaded, setDatesLoaded] = useState(0);
     const [direction, setDirection] = useState("up");
     const [isError, setIsError] = useState(false);
+    const [admin, setAdmin] = useState(false);
+    const [notAdmin, setNotAdmin] = useState(false);
+
+    const checkAdmin = () => {
+        const endpoint = "/validate-token";
+        fetch(endpoint, {
+            method: "POST",
+            credentials: "include"
+        }).then(res => {
+            if (!res.ok) setNotAdmin(true);
+            if (res.status === 200) setAdmin(true);
+        })
+    }
 
     const parseDate = (rawDate) => {
-        const year = parseInt(rawDate.match(/y[0-9]{4}m/g)[0].slice(1, -1));
-        const month = parseInt(rawDate.match(/m[0-9]{1,2}/g)[0].slice(1));
+        const year = rawDate.match(/y[0-9]{4}m/g)[0].slice(1, -1);
+        const month = rawDate.match(/m[0-9]{1,2}/g)[0].slice(1);
         return  {year: year, month: month};
     }
 
@@ -31,8 +48,8 @@ const Timeline = ({ section, token }) => {
         timelineAPI.months().then(data => {
             if (!data.length) setIsError(true);
             const sortedData = data.sort((a, b) => {
-                const dateOne = parseDate(a).year + parseDate(a).month;
-                const dateTwo = parseDate(b).year + parseDate(b).month;
+                const dateOne = parseInt(parseDate(a).year + parseDate(a).month);
+                const dateTwo = parseInt(parseDate(b).year + parseDate(b).month);
                 return dateOne - dateTwo;
             })
             setAllMonths(sortedData.reverse());
@@ -55,6 +72,7 @@ const Timeline = ({ section, token }) => {
     useEffect(() => {
         if (!allMonths.length && !isError) getMonths();
         else if (!Object.keys(posts).length && !isError) getTimeline();
+        if (!admin && !notAdmin) checkAdmin();
     });
 
     const months = [
@@ -65,6 +83,19 @@ const Timeline = ({ section, token }) => {
     const monthPostKeys = Object.keys(posts).length ? Object.keys(posts) : [];
     const mainSection = useRef();
     const loadMore = useRef();
+
+    const [ showPostCreator, setShowPostCreator ] = useState(false);
+
+    const setPost = data => {
+        timelineAPI.setPost(data)
+        .then(res => {
+            if (res.ok) {
+                console.log("Added Post");
+                // Make it refresh current posts
+            }
+            else setAdmin(false);
+        })
+    }
 
     return (
         <React.Fragment>
@@ -77,7 +108,28 @@ const Timeline = ({ section, token }) => {
                     window.location = `${origin}/${location.toLowerCase()}`;
                 }, 1000);
             }}/>
+            
             <section className={timelineStyles.posts_section} ref={mainSection}>
+                <div 
+                    className={timelineStyles.add_post} 
+                    style={{ 
+                        display: admin ? "flex" : "none",
+                        opacity: direction === "up" ? 1 : 0,
+                    }} 
+                    onClick={() => {
+                    setShowPostCreator(!showPostCreator);
+                }}>
+                    <FontAwesomeIcon icon={faPlus} style={{ cursor: "pointer" }} onClick={() => {
+                    setShowPostCreator(!showPostCreator);
+                }}/>
+                </div>
+                { admin ? 
+                    <PostCreator 
+                        show={showPostCreator} 
+                        cancel={() => 
+                        setShowPostCreator(!showPostCreator)}
+                        setPost={data => setPost(data)}
+                /> : null }
                 {monthPostKeys.reverse().map((monthPostKey, idx) => {
                     const dateObj = new Date();
                     const {year, month} = parseDate(monthPostKey);
@@ -92,7 +144,9 @@ const Timeline = ({ section, token }) => {
                                         key={idx}
                                         months={months} 
                                         direction={direction}
-                                        monthName={monthName}/>
+                                        monthName={monthName}
+                                        idx={idx}
+                                        admin={admin}/>
                 })}
                 {datesLoaded < allMonths.length && Object.keys(posts).length ? 
                     <p className={timelineStyles.load_more} onClick={getTimeline} ref={loadMore}>Load More</p> : null}

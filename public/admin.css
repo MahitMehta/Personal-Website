@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root {
+  --grey: #151515;
+  --aqua-marine: #97ffea;
+  --sky-blue: #6be1ff;
+  --dark-grey: #111111;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--grey);
+}
+
+.title {
+  font-family: "Montserrat";
+  color: white;
+  font-size: 1.5rem;
+  margin: 15px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 10px;
+  min-width: 250px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 5px;
+  font-size: 0.75rem;
+  color: white;
+  font-family: "Montserrat";
+  text-align: center;
+}
+
+.login-form label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-family: "Montserrat";
+  pointer-events: none;
+}
+
+.login-form input[type="submit"] {
+  width: 100px;
+  margin: 15px;
+  border-radius: 5px;
+  margin-left: 50%;
+  transform: translate(-50%);
+  height: 25px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  font-family: "Montserrat";
+  font-size: 0.75rem;
+}
+
+.logo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 25px;
+}

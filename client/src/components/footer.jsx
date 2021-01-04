@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import footerStyles from "../styles/footer.module.css";
 
 //IMGS
 import displayPicture from "../images/dp.jpg";
 
 const Footer = ({ mainSection, showAlert }) => {
+    const [ notAdmin, setNotAdmin ] = useState(false);
+    const [ admin, setAdmin ] = useState(false);
+
+    const checkAdmin = () => {
+        const endpoint = "/validate-token";
+        fetch(endpoint, {
+            method: "POST",
+            credentials: "include"
+        }).then(res => {
+            if (!res.ok) setNotAdmin(true);
+            if (res.status === 200) setAdmin(true);
+        })
+    }
+
+    useEffect(() => {
+        if (!notAdmin) checkAdmin()
+    });
 
     return (
         <footer className={footerStyles.footer}>
@@ -65,6 +82,13 @@ const Footer = ({ mainSection, showAlert }) => {
                     Mahit Mehta
                 </a>
             </h4>
+            { admin ?
+                <button className={footerStyles.logout} onClick={() => {
+                    document.cookie = "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    const origin = window.location.origin;
+                    window.location.href = origin;
+                }}>Log Out</button>
+            : null}
         </footer>
     ) 
 }

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 import View from "./components/view";
-import Admin from "./components/admin";
 import Photography from "./components/photography";
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
@@ -29,9 +28,6 @@ ReactDOM.render(
         <Route exact path="/photography" render={() => (
           <Photography token={encrytedToken} />
         )}/>
-        <Route exact path="/admin" render={() => (
-          <Admin />
-        )} />
         <Redirect to="/"/>
       </Switch>
     </Router>

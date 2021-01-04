@@ -31,4 +31,6 @@ body::-webkit-scrollbar-thumb {
   --dark-grey: #111111;
   --light-blue: #a4c2f4;
   --dark-blue: #00213e;
+  --red: #ff0256;
+  --green: #02ff73;
 }

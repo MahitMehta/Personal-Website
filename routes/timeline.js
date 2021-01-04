@@ -1,32 +1,16 @@
-const createError = require('http-errors')
-const reasourceToken = "bWFoaXRtLXByb3h5LXRva2VuOmQyNjIxNjI4LTNkMWMtNDBjYS05OGFkLWMzODk3NDc2ZDdlYQ==";
-
-const validToken = (token, next) => {
-    if (!token) next(createError(403))
-    const slicedToken = token.split('Basic ')
-    if (slicedToken[1] === reasourceToken) return 
-    else next(createError(403))
-}
-
-exports.months = (req, res, next, db) => {
-    validToken(req.headers['authorization'], next)
+exports.months = (_, res, db) => {
     const ref = db.collection('timeline')
     ref.get().then(response => {
         const months = response.docs.map(doc => doc.id)
         res.send(months)
-    }).catch(err => {
-        next(createError(500, "Internal Server Error"))
-    })
+    }).catch(() => res.sendStatus(500))
 }
 
-exports.posts = (req, res, next, db) => {
-    validToken(req.headers['authorization'], next)
-    const errMsg = 'Either a internal server error occurred or the requested data can not be retrieved at this time'
-
+exports.posts = (req, res, db) => {
     const year = req.query.y
     const month = req.query.m
     if (!year || !month) {
-        next(createError(400, "Please provide the required query parameters!"))
+        res.sendStatus(400)
         return
     }
     const date = `y${year}m${month}`
@@ -41,6 +25,36 @@ exports.posts = (req, res, next, db) => {
         resObj[date] = data
         res.send(resObj)
     }).catch(() => {
-        next(createError(500, "Internal Server Error"))
+        res.sendStatus(500)
     })
+}
+
+exports.setPost = (req, res, db) => {
+    const { title, description, links } = req.body
+    const allLinks = links.map(({ name, link }) => {
+        const refObj = {};
+        refObj[name] = link
+        return refObj
+    })
+    const date = new Date()
+    const year = date.getUTCFullYear()
+    const month = (date.getUTCMonth() + 1) / 10 < 1 ? `0${date.getUTCMonth() + 1}` : date.getUTCMonth() + 1
+    const postDate = `y${year}m${month}`
+    const currentEvents = db.collection(`timeline/${postDate}/events`)
+    currentEvents.get()
+        .then(response => {
+            const eventCount = response.docs.length
+            const postDocRef = db.doc(`timeline/${postDate}`)
+            postDocRef.set({ timestamp: Date.now() }).then(() => {
+                const newPostRef = db.doc(`timeline/${postDate}/events/${eventCount + 1}`)
+                newPostRef.set({
+                    header: title,
+                    description: description,
+                    links: allLinks,
+                    timestamp: Date.now()
+                }).then(() => {
+                    res.sendStatus(200)
+                }).catch(_ => res.sendStatus(500))
+            }).catch(_ => res.sendStatus(500))
+        }).catch(_ => res.sendStatus(500))
 }

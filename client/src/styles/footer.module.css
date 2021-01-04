@@ -140,6 +140,28 @@
   transform: translate(calc(15px + 0.4vw), -5px);
 }
 
+.logout {
+  transition: 250ms;
+  width: 75px;
+  height: 25px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: "Montserrat";
+  margin: 10px;
+  margin-top: 0px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.logout:hover {
+  color: rgba(255, 255, 255, 0.45);
+}
+
 @media (max-width: 675px) {
   .footer_parts {
     flex-direction: column;

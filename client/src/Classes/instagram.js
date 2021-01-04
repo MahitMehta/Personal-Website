@@ -9,8 +9,8 @@ class Instagram {
         const data = await fetch(endpoint, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': this.proxyAuth
-            }
+                'Authorization': this.proxyAuth,
+            },
         })
             .then(res => res.json())
             .then(data => {

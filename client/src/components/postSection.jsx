@@ -18,7 +18,8 @@ const headerAnimation = (element, direction) => {
     observer.observe(element);
 }
 
-const PostSection = ({ postKeys, showYear, postData, year, months, direction, monthName}) => {
+// Make it proporly order the posts (newest - oldest)
+const PostSection = ({ postKeys, showYear, postData, year, months, direction, monthName, admin, idx}) => {
     const postSection = useRef();
     const header = useRef();
 
@@ -30,11 +31,17 @@ const PostSection = ({ postKeys, showYear, postData, year, months, direction, mo
 
     useEffect(() => {
         headerAnimation(header.current, direction);
-    }, [header, direction])    
- 
+    }, [header, direction])  
+
     return (
-        <section className={timelineStyles.month_section} ref={postSection}>
-            <h1 className={timelineStyles.month} ref={header}>{monthName} {showYear ? year : ""}</h1>
+        <section 
+            className={timelineStyles.month_section} 
+            ref={postSection}>
+            <h1 
+                className={timelineStyles.month} 
+                ref={header}
+                style={{ marginTop: admin && idx === 0 ? "0vh" : "8.5vh"}}
+            >{monthName} {showYear ? year : ""}</h1>
             <div className={timelineStyles.month_div}>
                 {postKeys.map((postKey, idx) => <Post key={idx} 
                                                     direction={direction} 
@@ -51,7 +58,7 @@ const PostSection = ({ postKeys, showYear, postData, year, months, direction, mo
                         const timeOut = (maxFadeTime / posts) * idx;
                         return timeOut
                     }
-                }}/>)}
+                }} admin={admin} />)}
             </div>
         </section>
     )

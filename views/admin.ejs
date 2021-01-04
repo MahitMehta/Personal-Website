@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Mahit Mehta</title>
+    <script src="admin.js" defer></script>
+    <link href="admin.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/9d03eba9c5.js"></script>
+</head>
+<body>
+    <img src="mmLogoB.svg" class="logo" />
+    <h1 class="title" >Login</h1>
+    <form class="login-form">
+        <div class="field-div"> 
+            <label class="label"><i class="fa fa-envelope"></i>Email</label>
+            <input type="email" aria-placeholder="Email" class="field"/>
+        </div>
+        <div class="field-div">
+            <label class="label"><i class="fa fa-lock "></i>Password</label>
+            <input type="password" aria-placeholder="Password" class="field"/>
+        </div>
+        <input type="submit" value="Log In" />
+    </form>
+    <script>
+        const csrfToken = "<%=csrfToken%>";
+    </script>
+</body>
+</html>

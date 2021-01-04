@@ -19,7 +19,7 @@ const postAnimation = (element, timeOut, direction) => {
     observer.observe(element);
 }
 
-const Post = ({ direction, post, months, postTimeOut }) => {
+const Post = ({ direction, post, months, postTimeOut, admin }) => {
     const isLinks = post.links ? true : false;
     const colorOptions = ["#9CEEFF", "#A29CFF", "#B0FF9C", "#FFD488"];
     const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
@@ -27,7 +27,7 @@ const Post = ({ direction, post, months, postTimeOut }) => {
     const getDate = () => {
         const timestamp = post.timestamp;
         if (!timestamp) return
-        const date = new Date(timestamp._seconds * 1000);
+        const date = new Date(timestamp._seconds ? timestamp._seconds * 1000 : timestamp);
         return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
     }
 
@@ -40,9 +40,9 @@ const Post = ({ direction, post, months, postTimeOut }) => {
     return (
         <div className={postStyles.post_div} ref={postDiv}>
             <div className={postStyles.post_bg}></div>
-            <h1 className={postStyles.post_header}>{post.header}</h1>
+            <h1 className={postStyles.post_header} contentEditable={admin} suppressContentEditableWarning={admin}>{post.header}</h1>
             <p className={postStyles.post_date}>{getDate()}</p>
-            <p className={postStyles.post_description}>{post.description}</p>
+            <p className={postStyles.post_description} contentEditable={admin} suppressContentEditableWarning={admin}>{post.description}</p>
             {isLinks ? <h3 className={postStyles.demo_subheading}>Demonstration at:</h3> : null}
                 <ul className={postStyles.links_list}>
                 {isLinks ? post.links.map((link, idx) => {

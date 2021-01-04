@@ -1,0 +1,185 @@
+.creator {
+  transition: 350ms;
+  min-width: 325px;
+  min-height: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+  background-color: var(--dark-grey);
+  margin: 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+  overflow: hidden;
+}
+
+.title {
+  color: white;
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.sub_title {
+  color: white;
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 0.75rem;
+  margin: 5px;
+}
+
+.post_field {
+  margin: 5px;
+  padding: 5px 10px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-family: "Montserrat";
+}
+
+.post_field::placeholder {
+  font-family: "Montserrat";
+}
+
+.post_add_links {
+  transition: 150ms;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 5px;
+  cursor: pointer;
+}
+
+.post_add_links:hover {
+  transform: scale(1.1);
+}
+
+.refrence_link_creator {
+  display: flex;
+  align-items: center;
+}
+
+.refrence_link_creator > .post_field {
+  width: 125px;
+}
+
+.refrence_link_creator > button {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  margin: 2.5px;
+  border: none;
+  outline: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.refrence_link_creator > button::after {
+  transition: 250ms;
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.refrence_link_creator > button:hover::after {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.refrence_link_remove {
+  background-color: var(--red);
+}
+
+.refrence_link_add {
+  background-color: var(--green);
+}
+
+.post_buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post_buttons > button {
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 5px 10px;
+  color: white;
+  font-weight: bold;
+  font-family: "Montserrat";
+  margin: 10px 5px;
+  min-width: 75px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.post_buttons > button::after {
+  transition: 250ms;
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.post_buttons > button:hover::after {
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.post_buttons > button:first-child {
+  background-color: var(--red);
+}
+
+.post_buttons > button:last-child {
+  background-color: var(--green);
+}
+
+.refrence_link {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: auto;
+  font-family: "Montserrat";
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  padding: 5px;
+  min-width: 200px;
+  font-size: 0.85rem;
+  margin: 5px;
+}
+
+.refrence_link > div {
+  margin-right: auto;
+  max-width: 190px;
+  overflow: hidden;
+  display: flex;
+  gap: 5px;
+}
+
+.refrence_link > div > span {
+  white-space: nowrap;
+}
+
+.refrence_link_part {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.refrence_link_data {
+  color: rgba(255, 255, 255, 0.25);
+}
