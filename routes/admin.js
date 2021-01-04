@@ -3,6 +3,16 @@ const jwt = require('jsonwebtoken')
 const dotenv = require('dotenv')
 dotenv.config()
 
+function addAdminToken(res, maxTime) {
+    const deadline = { deadline: Date.now() + maxTime }
+    const adminToken = jwt.sign(deadline, process.env.MAHITM_ACCESS_TOKEN_SECRET)
+    res.cookie("adminToken", adminToken, {
+        maxAge: maxTime,
+        httpOnly: true,
+        secure: process.env.PRODUCTION ? true : false
+    })
+}
+
 exports.login = (req, res) => res.render('admin.ejs', {"csrfToken": req.csrfToken()})
 
 exports.verifyCreds = (req, res) => {
@@ -23,15 +33,14 @@ exports.verifyCreds = (req, res) => {
 
     if (email === adminEmail && pass === adminPass) {
         const maxTime = 5 * 60 * 1000
-        const deadline = { deadline: Date.now() + maxTime }
-        const adminToken = jwt.sign(deadline, process.env.MAHITM_ACCESS_TOKEN_SECRET)
-        res.cookie("adminToken", adminToken, {
-            maxAge: maxTime,
-            httpOnly: true,
-            secure: process.env.PRODUCTION ? true : false
-        })
+        addAdminToken(res, maxTime)
         res.send({ admin: true }) 
     } else {
         res.send({ admin: false })
     }
+}
+
+exports.logout = (_, res) => {
+    addAdminToken(res, 0)
+    res.sendStatus(200)
 }

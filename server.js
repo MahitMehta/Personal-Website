@@ -58,6 +58,7 @@ const validateResourceToken = (req, _, next) => {
 // Admin HTTP Routes 
 app.post('/validate-token', validateAdminToken, (_, res) => res.sendStatus(200))
 app.post('/api/timeline/set-post', validateAdminToken, (req, res) => timeline.setPost(req, res, db))
+app.post('/admin/logout', validateAdminToken, (req, res) => adminRoutes.logout(req, res))
 
 app.get('/admin', csrfProtection, (req, res) => adminRoutes.login(req, res))
 app.get('/admin/verify-creds', csrfProtection, (req, res) => adminRoutes.verifyCreds(req, res))

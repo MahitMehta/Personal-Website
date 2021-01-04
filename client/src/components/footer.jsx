@@ -20,7 +20,7 @@ const Footer = ({ mainSection, showAlert }) => {
     }
 
     useEffect(() => {
-        if (!notAdmin) checkAdmin()
+        if (!notAdmin && !admin) checkAdmin()
     });
 
     return (
@@ -84,9 +84,17 @@ const Footer = ({ mainSection, showAlert }) => {
             </h4>
             { admin ?
                 <button className={footerStyles.logout} onClick={() => {
-                    document.cookie = "adminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    const origin = window.location.origin;
-                    window.location.href = origin;
+                    const endpoint = "/admin/logout";
+                    fetch(endpoint, {
+                        method: "POST",
+                        credentials: "include"
+                    }).then(res => {
+                        if (res.ok) {
+                            const origin = window.location.origin;
+                            window.location.href = origin;
+                        } else console.error('Failed to Log Out!');
+                    }).catch(err => console.error(err));
+                   
                 }}>Log Out</button>
             : null}
         </footer>

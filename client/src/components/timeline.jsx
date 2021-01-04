@@ -44,8 +44,8 @@ const Timeline = ({ section, token }) => {
 
     const timelineAPI = new TimelineAPI(token);
 
-    const getMonths = () => {
-        timelineAPI.months().then(data => {
+    const getMonths = async () => {
+        await timelineAPI.months().then(data => {
             if (!data.length) setIsError(true);
             const sortedData = data.sort((a, b) => {
                 const dateOne = parseInt(parseDate(a).year + parseDate(a).month);
@@ -62,8 +62,12 @@ const Timeline = ({ section, token }) => {
         timelineAPI.posts(year, month)
             .then(data => {
                 if (!data.length) setIsError(true);
-                const currentPosts = {...data, ...posts};
-                // const newDate = Object.keys(data)[0];
+                const queryiedPosts = { ...data };
+                const queryiedPostKeys = Object.keys(queryiedPosts);
+                queryiedPostKeys.forEach(queryiedPost => {
+                    queryiedPosts[queryiedPost].reverse();
+                })
+                const currentPosts = {...queryiedPosts, ...posts};
                 setPosts(currentPosts);
                 setDatesLoaded(datesLoaded + 1);
             }).catch(err => console.error(err))
