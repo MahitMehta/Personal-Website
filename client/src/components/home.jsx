@@ -187,13 +187,13 @@ const Home = ({ section }) => {
                         }}>Learn More</button>
                 </div>
                 <div className={homeStyles.web_projects}>
-                        <h1 className={homeStyles.part_title}>Web<br />Projects</h1>
-                        <img className={`${homeStyles.part_img} ${homeStyles.web_projects_img}`} src={Code} alt="Web Projects"/>
+                        <h1 className={homeStyles.part_title}>Projects</h1>
+                        <img className={`${homeStyles.part_img} ${homeStyles.web_projects_img}`} src={Code} alt="Projects"/>
                         <p className={homeStyles.part_description}>
-                            Web designing / developing is a creative passion of mine. Here you can view some of my best work!
+                            I have made many projects, some big and some small, here you can view some of my best work!
                         </p>
                         <button className={homeStyles.part_more} onClick={() => {
-                            setAlert({ header: "Web Projects", message: "Coming Soon!" })
+                            setAlert({ header: "Projects", message: "Coming Soon!" })
                         }}>Browse</button>
                 </div>
             </div>

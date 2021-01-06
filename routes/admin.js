@@ -27,11 +27,11 @@ exports.verifyCreds = (req, res) => {
     const decodedCreds = buff.toString('ascii')
     const creds = decodedCreds.split(':')
     const [email, pass] = creds
+    if (!email || !pass) res.sendStatus(400)
 
     const adminEmail = process.env.MAHITM_ADMIN_EMAIL
     const adminPass = process.env.MAHITM_ADMIN_PASS
-
-    if (email === adminEmail && pass === adminPass) {
+    if (email.toLowerCase() === adminEmail && pass === adminPass) {
         const maxTime = 5 * 60 * 1000
         addAdminToken(res, maxTime)
         res.send({ admin: true }) 

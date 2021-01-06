@@ -40,8 +40,11 @@ const csrfProtection = csrf({ cookie: true })
 const validateAdminToken = (req, res, next) => {
     const adminToken = req.cookies.adminToken
     jwt.verify(adminToken, process.env.MAHITM_ACCESS_TOKEN_SECRET, (err, data) => {
-        if (err) res.sendStatus(403)
-        if (data.deadline < Date.now()) res.sendStatus(403)
+        if (err) {
+            res.sendStatus(403)
+            return 
+        }
+        if (!data || data.deadline < Date.now()) res.sendStatus(403)
         next()  
     })
 }
