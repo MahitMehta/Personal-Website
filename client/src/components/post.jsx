@@ -20,7 +20,7 @@ const postAnimation = (element, timeOut, direction) => {
 }
 
 const Post = ({ direction, post, months, postTimeOut, admin }) => {
-    const isLinks = post.links ? true : false;
+    const isLinks = post.links.length ? true : false;
     const colorOptions = ["#9CEEFF", "#A29CFF", "#B0FF9C", "#FFD488"];
     const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
 

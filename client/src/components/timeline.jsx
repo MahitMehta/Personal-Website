@@ -138,7 +138,7 @@ const Timeline = ({ section, token }) => {
                     const dateObj = new Date();
                     const {year, month} = parseDate(monthPostKey);
                     const monthName = months[month - 1];
-                    const showYear = dateObj.getFullYear() !== year;
+                    const showYear = dateObj.getFullYear() !== parseInt(year);
                     const postKeys = posts[monthPostKey].map(postObj => Object.keys(postObj)[0]);
                     const postData = posts[monthPostKey];
                     return <PostSection postKeys={postKeys} 
