@@ -76,7 +76,8 @@ const Timeline = ({ section, token }) => {
     useEffect(() => {
         if (!allMonths.length && !isError) getMonths();
         else if (!Object.keys(posts).length && !isError) getTimeline();
-        if (!admin && !notAdmin) checkAdmin();
+        const isAdmin = atob(sessionStorage.getItem("a"));
+        if (!admin && !notAdmin && isAdmin === "true") checkAdmin();
     });
 
     const months = [
@@ -97,7 +98,10 @@ const Timeline = ({ section, token }) => {
                 console.log("Added Post");
                 // Make it refresh current posts
             }
-            else setAdmin(false);
+            else {
+                sessionStorage.removeItem("a");
+                setAdmin(false);
+            }
         })
     }
 
@@ -141,7 +145,8 @@ const Timeline = ({ section, token }) => {
                     const showYear = dateObj.getFullYear() !== parseInt(year);
                     const postKeys = posts[monthPostKey].map(postObj => Object.keys(postObj)[0]);
                     const postData = posts[monthPostKey];
-                    return <PostSection postKeys={postKeys} 
+                    return <PostSection monthPostKey={monthPostKey}
+                                        postKeys={postKeys} 
                                         postData={postData} 
                                         showYear={showYear} 
                                         year={year} 

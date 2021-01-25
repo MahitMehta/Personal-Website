@@ -20,8 +20,9 @@ const Footer = ({ mainSection, showAlert }) => {
     }
 
     useEffect(() => {
-        if (!notAdmin && !admin) checkAdmin()
-    });
+        const isAdmin = atob(sessionStorage.getItem("a"));
+        if (!notAdmin && !admin && isAdmin === "true") checkAdmin()
+    }, [admin, notAdmin]);
 
     return (
         <footer className={footerStyles.footer}>

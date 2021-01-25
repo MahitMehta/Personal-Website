@@ -53,6 +53,7 @@ form.addEventListener("submit", e => {
         const admin = data.admin; 
         if (admin) {
             const origin = window.location.origin;
+            sessionStorage.setItem("a", btoa("true"));
             window.location.href = origin;
         } else console.warn("Incorrect Email or Password!");
     })

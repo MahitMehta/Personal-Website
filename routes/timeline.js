@@ -58,3 +58,15 @@ exports.setPost = (req, res, db) => {
             }).catch(_ => res.sendStatus(500))
         }).catch(_ => res.sendStatus(500))
 }
+
+exports.deletePost = (req, res, db) => {
+    const { hide, postMonth, eventNumber} = req.body
+    if (hide) {
+        res.sendStatus(400)
+        return 
+    }
+    const postRef = db.doc(`timeline/${postMonth}/events/${eventNumber}`)
+    postRef.delete().then(() => {
+        res.sendStatus(200)
+    }).catch(() => res.sendStatus(500))
+}

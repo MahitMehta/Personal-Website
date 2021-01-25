@@ -29,6 +29,9 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post::after {
@@ -41,6 +44,11 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
+}
+
+.post > p {
+  font-family: "Nunito Sans";
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .post:hover::after {

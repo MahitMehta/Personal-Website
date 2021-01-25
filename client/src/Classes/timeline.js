@@ -1,5 +1,5 @@
 class Timeline {
-    constructor(token) {
+    constructor(token = "") {
         this.token = token;
         this.proxyAuth = `Basic ${this.token}`;
     }
@@ -47,6 +47,18 @@ class Timeline {
             body: data
         })
         return res;
+    }
+    async deletePost(params) {
+        const endpoint = "/api/timeline/delete-post";
+        const res = await fetch(endpoint, {
+            method: "DELETE", 
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: params
+        })
+        return res; 
     }
 }
 

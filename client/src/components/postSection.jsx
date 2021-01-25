@@ -19,7 +19,7 @@ const headerAnimation = (element, direction) => {
 }
 
 // Make it proporly order the posts (newest - oldest)
-const PostSection = ({ postKeys, showYear, postData, year, months, direction, monthName, admin, idx}) => {
+const PostSection = ({ postKeys, showYear, postData, year, months, direction, monthName, admin, idx, monthPostKey}) => {
     const postSection = useRef();
     const header = useRef();
 
@@ -44,6 +44,8 @@ const PostSection = ({ postKeys, showYear, postData, year, months, direction, mo
             >{monthName} {showYear ? year : ""}</h1>
             <div className={timelineStyles.month_div}>
                 {postKeys.map((postKey, idx) => <Post key={idx} 
+                                                    monthPostKey={monthPostKey}
+                                                    eventNumber={postKey}
                                                     direction={direction} 
                                                     post={postData[idx][postKey]} 
                                                     months={months} 

@@ -1,5 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef } from 'react';
 import postStyles from "../styles/post.module.css";
+import TimelineAPI from "../Classes/timeline";
 
 const postAnimation = (element, timeOut, direction) => {
     const translateAmount = direction === "up" ? 0 : 25;
@@ -19,7 +22,7 @@ const postAnimation = (element, timeOut, direction) => {
     observer.observe(element);
 }
 
-const Post = ({ direction, post, months, postTimeOut, admin }) => {
+const Post = ({ direction, post, months, postTimeOut, admin, eventNumber, monthPostKey }) => {
     const isLinks = post.links.length ? true : false;
     const colorOptions = ["#9CEEFF", "#A29CFF", "#B0FF9C", "#FFD488"];
     const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
@@ -31,6 +34,22 @@ const Post = ({ direction, post, months, postTimeOut, admin }) => {
         return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
     }
 
+    const handleDelete = () => {
+        const {description, header, links}  = post;
+        let hide = description || header || links.length ? true : false;
+        if (hide) {
+            // Make Post Hidden In Future
+            console.log("Post Can't Be Deleted (hide == true)")
+            return;
+        }
+        const params = { hide: hide, postMonth: monthPostKey, eventNumber: eventNumber}
+        const serializedData= JSON.stringify(params);
+        new TimelineAPI().deletePost(serializedData).then(res => {
+            console.log(res);
+        }).catch(_ => console.warn("Failed To Delete Post!"));
+        
+    }
+
     const postDiv = useRef();
     useEffect(() => {
         postDiv.current.style.backgroundColor = color;
@@ -39,6 +58,11 @@ const Post = ({ direction, post, months, postTimeOut, admin }) => {
 
     return (
         <div className={postStyles.post_div} ref={postDiv}>
+            { admin ? (
+                <button className={postStyles.delete_post} onClick={handleDelete}>
+                    <FontAwesomeIcon icon={faTimes} />
+                </button>
+            ) : null}
             <div className={postStyles.post_bg}></div>
             <h1 className={postStyles.post_header} contentEditable={admin} suppressContentEditableWarning={admin}>{post.header}</h1>
             <p className={postStyles.post_date}>{getDate()}</p>
