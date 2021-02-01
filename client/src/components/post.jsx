@@ -64,16 +64,18 @@ const Post = ({ direction, post, months, postTimeOut, admin, eventNumber, monthP
                 </button>
             ) : null}
             <div className={postStyles.post_bg}></div>
-            <h1 className={postStyles.post_header} contentEditable={admin} suppressContentEditableWarning={admin}>{post.header}</h1>
-            <p className={postStyles.post_date}>{getDate()}</p>
-            <p className={postStyles.post_description} contentEditable={admin} suppressContentEditableWarning={admin}>{post.description}</p>
-            {isLinks ? <h3 className={postStyles.demo_subheading}>Demonstration at:</h3> : null}
-                <ul className={postStyles.links_list}>
-                {isLinks ? post.links.map((link, idx) => {
-                    const key = Object.keys(link)[0];
-                return <li key={idx} className={postStyles.post_link}><a href={link[key]} target="_blank" rel="noreferrer">{key}</a></li>
-                }) : null}
-            </ul>
+            <article className={postStyles.post_content}>
+                <h1 className={postStyles.post_header} contentEditable={admin} suppressContentEditableWarning={admin}>{post.header}</h1>
+                <p className={postStyles.post_date}>{getDate()}</p>
+                <p className={postStyles.post_description} contentEditable={admin} suppressContentEditableWarning={admin}>{post.description}</p>
+                {isLinks ? <h3 className={postStyles.demo_subheading}>Demonstration at:</h3> : null}
+                    <ul className={postStyles.links_list}>
+                    {isLinks ? post.links.map((link, idx) => {
+                        const key = Object.keys(link)[0];
+                    return <li key={idx} className={postStyles.post_link}><a href={link[key]} target="_blank" rel="noreferrer">{key}</a></li>
+                    }) : null}
+                </ul>
+            </article>
         </div>
     )
 }

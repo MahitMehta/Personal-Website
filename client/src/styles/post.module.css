@@ -8,7 +8,7 @@
   border-radius: 2.5vw;
   margin: 2vh;
   margin-bottom: 10px;
-  padding: 25px;
+  padding: 1.5vw;
   position: relative;
   opacity: 0;
   transform: translateY(25px);
@@ -67,10 +67,26 @@
   background-color: var(--dark-grey);
 }
 
+.post_content {
+  min-height: 325px;
+  height: 100%;
+  overflow: auto;
+}
+
+.post_content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.post_content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--grey);
+}
+
 .post_header {
   font-family: "Nunito Sans";
   color: white;
   font-size: clamp(20px, 1.75vw, 1.75vw);
+  min-height: 60px;
 }
 
 .post_description {
@@ -80,13 +96,11 @@
   width: 80%;
   min-width: 225px;
   font-size: clamp(1rem, 1.25vw, 1.25vw);
-  overflow: auto;
-  max-height: 45%;
 }
 
-.post_description::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
+.post_description::-webkit-scrollbar-thumb {
+  background-color: var(--grey);
+  border-radius: 10px;
 }
 
 .demo_subheading {
@@ -119,6 +133,10 @@
   .post_bg {
     top: 5px;
     border-radius: 25px;
+  }
+
+  .post_div {
+    padding: 25px;
   }
 }
 
