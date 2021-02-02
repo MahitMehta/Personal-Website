@@ -68,7 +68,7 @@
 }
 
 .post_content {
-  min-height: 325px;
+  min-height: 275px;
   height: 100%;
   overflow: auto;
 }
