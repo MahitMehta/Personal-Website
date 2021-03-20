@@ -13,8 +13,12 @@ class Instagram {
             },
         })
             .then(res => res.json())
-            .then(data => {
-                return data;
+            .then(({posts, ignoreKey}) => {
+                const filteredData = posts.filter(({ caption }) => {
+                    if (!caption) return true
+                    return !caption.includes(ignoreKey)
+                });
+                return filteredData;
             }).catch(() => {
                 return []
             });
