@@ -88,6 +88,7 @@ const Footer = ({ mainSection, showAlert }) => {
                     Mahit Mehta
                 </a>
             </h4>
+            <div className={footerStyles.icon_ref}>Icons made by <a href="https://www.freepik.com" target="_blank" rel="noreferrer" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             { admin ?
                 <button className={footerStyles.logout} onClick={() => {
                     const endpoint = "/admin/logout";
