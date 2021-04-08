@@ -20,7 +20,21 @@ const adminRoutes = require('./routes/admin')
 
 // Firebase Setup
 const admin = require('firebase-admin')
-const serviceAccount = require('./key.json')
+//const serviceAccount = require('./key.json')
+
+const serviceAccount = {
+    type: process.env.MAHITM_FIREBASE_TYPE,
+    project_id: process.env.MAHITM_FIREBASE_PROJECT_ID,
+    private_key_id: process.env.MAHITM_FIREBASE_PRIVATE_KEY_ID,
+    private_key: process.env.MAHITM_FIREBASE_PRIVATE_KEY,
+    client_email: process.env.MAHITM_FIREBASE_CLIENT_EMAIL,
+    client_id: process.env.MAHITM_FIREBASE_CLIENT_ID,
+    auth_uri: process.env.MAHITM_FIREBASE_AUTH_URI,
+    token_uri: process.env.MAHITM_FIREBASE_TOKEN_URI,
+    auth_provider_x509_cert_url: process.env.MAHITM_FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
+    client_x509_cert_url: process.env.MAHITM_FIREBASE_CLIENT_X509_CERT_URL,
+}
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: 'https://portfolio-5ce5f.firebaseio.com'
@@ -69,12 +83,17 @@ app.get('/admin', csrfProtection, (req, res) => adminRoutes.login(req, res))
 app.get('/admin/verify-creds', csrfProtection, (req, res) => adminRoutes.verifyCreds(req, res))
 
 // User Routes
+app.get('/resume.pdf', (_, res) => {
+    res.sendFile(path.join(__dirname, './static/resume.pdf'))
+})
+
 app.get('/api/timeline/months', validateResourceToken, (req, res) => timeline.months(req, res, db))
 app.get('/api/timeline/posts', validateResourceToken, (req, res) => timeline.posts(req, res, db)) 
 app.get('/api/instagram/posts', validateResourceToken, (req, res) => instagram.posts(req, res))
 app.get('*', (_, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+})
+
 
 const PORT = process.env.PORT || 5000
 server.listen(PORT)

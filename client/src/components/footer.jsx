@@ -3,6 +3,8 @@ import footerStyles from "../styles/footer.module.css";
 
 //IMGS
 import displayPicture from "../images/dp.jpg";
+import gitHubSVG from "../images/github.svg";
+import linkedInSVG from  "../images/linkedin.svg";
 
 const Footer = ({ mainSection, showAlert }) => {
     const [ notAdmin, setNotAdmin ] = useState(false);
@@ -52,22 +54,25 @@ const Footer = ({ mainSection, showAlert }) => {
                                 </a>
                             </td>
                         </tr>
+                        <tr className={footerStyles.footer_part_row}><td><a href="/resume.pdf" target="_blank">Resume</a></td></tr>
                     </tbody>
                 </table>
                 <table className={footerStyles.footer_part}>
                     <tbody style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-                        <tr><th className={footerStyles.footer_part_header}>Social Media</th></tr>
+                        <tr><th className={footerStyles.footer_part_header}>Social Networks</th></tr>
                         <tr className={footerStyles.footer_part_row 
                         }>  
                             <td>
-                                <a href="https://www.instagram.com/the_beauty_in_this_earth/?hl=en" target="_blank" rel="noreferrer">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg" alt="instagram-icon" className={footerStyles.footer_sm_icon}/>
+                                <a href="https://www.linkedin.com/in/mahit-mehta-068603203/" target="_blank" rel="noreferrer">
+                                    <img src={linkedInSVG} alt="instagram-icon" className={footerStyles.footer_sm_icon}/>
                                 </a>
                             </td>
                             <td>
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/174/174848.svg" alt="facebook-icon" className={footerStyles.footer_sm_icon} onClick={() => {
-                                    showAlert({ header: "Link Broken", message: "Try Again Later!" })
-                                }}/>
+                                <a href="https://github.com/MahitMehta" target="_blank" rel="noreferrer">
+                                    <img src={gitHubSVG} alt="facebook-icon" className={footerStyles.footer_sm_icon} onClick={() => {
+                                        // showAlert({ header: "Link Broken", message: "Try Again Later!" })
+                                    }}/>
+                                </a>
                             </td>
                             <td>
                                 <a href="https://twitter.com/MahitMehta/status/1252650756810964993" target="_blank" rel="noreferrer">
