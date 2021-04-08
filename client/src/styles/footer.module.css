@@ -162,7 +162,22 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
+.icon_ref {
+  margin: 10px 15px;
+  color: rgba(255, 255, 255, 0.1);
+  font-family: "Abel";
+}
+
+.icon_ref a {
+  color: rgba(255, 255, 255, 0.1);
+  font-family: "Abel";
+}
+
 @media (max-width: 675px) {
+  .icon_ref {
+    text-align: center;
+  }
+
   .footer_parts {
     flex-direction: column;
     align-items: center;
