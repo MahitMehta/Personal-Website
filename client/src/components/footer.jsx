@@ -5,6 +5,7 @@ import footerStyles from "../styles/footer.module.css";
 import displayPicture from "../images/dp.jpg";
 import gitHubSVG from "../images/github.svg";
 import linkedInSVG from  "../images/linkedin.svg";
+import TwitterPNG from "../assets/twitter.png";
 
 const Footer = ({ mainSection, showAlert }) => {
     const [ notAdmin, setNotAdmin ] = useState(false);
@@ -64,7 +65,7 @@ const Footer = ({ mainSection, showAlert }) => {
                         }>  
                             <td>
                                 <a href="https://www.linkedin.com/in/mahit-mehta-068603203/" target="_blank" rel="noreferrer">
-                                    <img src={linkedInSVG} alt="instagram-icon" className={footerStyles.footer_sm_icon}/>
+                                    <img src={linkedInSVG} alt="linkedin-icon" className={footerStyles.footer_sm_icon}/>
                                 </a>
                             </td>
                             <td>
@@ -76,7 +77,7 @@ const Footer = ({ mainSection, showAlert }) => {
                             </td>
                             <td>
                                 <a href="https://twitter.com/MahitMehta/status/1252650756810964993" target="_blank" rel="noreferrer">
-                                    <img src="https://www.flaticon.com/svg/static/icons/svg/733/733579.svg" alt="twitter-icon" className={footerStyles.footer_sm_icon}/>
+                                    <img src={TwitterPNG} alt="twitter-icon" className={footerStyles.footer_sm_icon}/>
                                 </a>
                             </td>
                         </tr>

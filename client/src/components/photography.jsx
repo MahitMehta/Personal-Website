@@ -8,6 +8,7 @@ import Alert from "./alert";
 import DivisionNav from "./divisionNav";
 
 import Instagram from "../Classes/instagram";
+import InstagramPNG from "../assets/instagram.png";
 
 const Photography = ({ token }) => {
     document.title = "Divisions - Mahit Mehta";
@@ -56,7 +57,7 @@ const Photography = ({ token }) => {
             </ul>
             <div className={photographyStyles.more}>
                 <a href="https://www.instagram.com/the_beauty_in_this_earth/?hl=en" target="_blank" rel="noreferrer">
-                    <img src="https://www.flaticon.com/svg/static/icons/svg/174/174855.svg" alt="instagram-icon" className={photographyStyles.sm_icon}/>
+                    <img src={InstagramPNG} alt="instagram-icon" className={photographyStyles.sm_icon}/>
                 </a>
                 <a href="https://www.instagram.com/the_beauty_in_this_earth/?hl=en" target="_blank" rel="noreferrer">View More on Instagram</a>
                 
